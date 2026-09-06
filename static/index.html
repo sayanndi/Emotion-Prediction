@@ -1,11 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>signal. — what's underneath the words?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400;1,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css" />
 </head>
 <body>
-    <h1>App is working...</h1>
+
+  <div class="wash" id="wash" aria-hidden="true"></div>
+
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <span class="mark">signal.</span>
+    <span class="topbar-status" id="topbarStatus">reading text as feeling</span>
+  </header>
+
+  <main class="stage">
+
+    <section class="hero">
+      <h1 class="hero-line">
+        <em>Every sentence</em> carries a feeling<br />
+        before it carries a meaning.
+      </h1>
+      <p class="hero-sub">
+        Type something you actually mean. A small recurrent network trained on six
+        emotions will tell you what it hears underneath the words.
+      </p>
+    </section>
+
+    <section class="panel" aria-label="Emotion input">
+      <div class="input-frame" id="inputFrame">
+        <textarea
+          id="textInput"
+          maxlength="2000"
+          placeholder="I haven't told anyone this yet, but..."
+          aria-label="Text to analyze"
+        ></textarea>
+        <svg class="trace" viewBox="0 0 100 6" preserveAspectRatio="none" aria-hidden="true">
+          <path id="tracePath" d="M0,3 L100,3" />
+        </svg>
+      </div>
+
+      <div class="panel-footer">
+        <span class="char-count" id="charCount">0 / 2000</span>
+        <button id="analyzeBtn" class="btn" type="button">
+          <span class="btn-label">Read the signal</span>
+          <span class="btn-pulse" aria-hidden="true">
+            <i></i><i></i><i></i>
+          </span>
+        </button>
+      </div>
+
+      <p class="error" id="errorMsg" role="alert" hidden></p>
+    </section>
+
+    <section class="result" id="resultSection" hidden aria-live="polite">
+      <div class="result-top">
+        <div class="result-emoji" id="resultEmoji">🙂</div>
+        <div class="result-figures">
+          <span class="result-percent" id="resultPercent">0%</span>
+          <span class="result-emotion" id="resultEmotion">joy</span>
+        </div>
+      </div>
+      <p class="result-caption" id="resultCaption">confidence, read from your own words</p>
+
+      <div class="bars" id="bars"></div>
+
+      <button class="btn-ghost" id="resetBtn" type="button">Read something else</button>
+    </section>
+
+  </main>
+
+  <footer class="foot">
+    <span>Bi-GRU · trained on six labeled emotions · runs locally on the server, not in your browser</span>
+  </footer>
+
+  <script src="/static/script.js"></script>
 </body>
 </html>
